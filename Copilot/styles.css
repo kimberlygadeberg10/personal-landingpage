@@ -1,0 +1,77 @@
+/* Rest default spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page background */
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8ecf3);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main container */
+.app {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.app h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Search input */
+input {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* User list container */
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual user card */
+.user-card {
+    background: #f9fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e1e5ee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba( 0, 0, 0, 0.08);
+}
+
+.user-card p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+}
