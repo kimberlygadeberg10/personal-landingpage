@@ -79,3 +79,31 @@ async function loadWeather() {
 
 // call the loadWeather function when the page loads to display current weather data for Chicago, Illinois
 loadWeather();
+
+//Asynchronous function to fetch currency exchange rates from USD to Euro
+async function loadCurrency() {
+    try {
+        // Fetch currency exchange rates from USD to Euro
+        const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        
+        // Parse the JSON response to get the exchange rate data
+        const data = await response.json();
+
+        //Select the currency card element from the DOM
+        const currencyCard = document.getElementById('currency-card');
+
+        // Update the currency card with fetched exchange rate
+        currencyCard.innerHTML = `
+        <h2>Currency Exchange Rate</h2>
+        <p>1 USD = ${data.rates.EUR} EUR</p>
+        `;
+
+    } catch (error) {
+        // Handle any errors that occur during the fetch operation
+        console.error("Error fetching currency exchange rate:", error);
+    }
+}
+
+// call the loadCurrency function when the page loads to display current exchange rate from USD to Euro
+loadCurrency();
+
