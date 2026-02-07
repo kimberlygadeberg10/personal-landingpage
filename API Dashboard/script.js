@@ -16,3 +16,27 @@ async function loadDog() {
 
 // call the loadDog function when the page loads to display a random dog image
 loadDog();
+
+// Asynchronous function to fetch a random cat image from the Cat API and display it on the page
+async function loadCat() {
+    try {
+        // Fetch a random cat image from the Cat API
+        const response = await fetch("https://api.thecatapi.com/v1/images/search");
+        // Parse the JSON response to get the cat image data
+        const data = await response.json();
+        // Get the cat card element from the DOM
+        const catCard = document.getElementById('cat-card');
+        //Update the cat card with fetched image
+        catCard.innerHTML = `
+        <h2>Random Cat</h2>
+        <img src="${data[0].url}" width="200" alt="Random Cat">
+        `;
+
+    } catch (error) {
+        //Handling any errors that occur during the fetch operation
+        console.error("Error fetching cat image:", error);
+    }
+}
+
+// call the loadCat function when the page loads to display a random cat image
+loadCat();
