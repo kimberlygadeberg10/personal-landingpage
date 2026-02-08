@@ -29,3 +29,7 @@ h1 {
     padding: 20px;
     min-height: 200px;
 }
+
+#movie-card {
+    min-height: 450px;
+}
