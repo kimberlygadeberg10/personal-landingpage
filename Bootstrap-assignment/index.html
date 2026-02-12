@@ -27,7 +27,40 @@
         </div>
      </nav>
 
-    
-    
+     <!-- Container for the Form -->
+      <div class="container my-5">
+        <h2 class="mb-4">Registration Form</h2>
+        
+            <!-- Form fields will go here -->
+        <form>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password <span class="text-danger"></span></label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="termsCheck">
+                <label class="form-check-label" for="termsCheck">I agree to the terms and conditions</label>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+
 </body>
 </html>
