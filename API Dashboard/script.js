@@ -158,36 +158,38 @@ function startCarousel() {
 
 loadMovies();
 
-// Asynchronous function to fetch GitHub user data
-async function loadGitHubUser() {
-  try {
-    // Fetch GitHub user data for the user
-    const response = await fetch("https://api.github.com/users/${username}");
+// GitHub Fetch Button Event Listener
+document.getElementById("fetch-github").addEventListener("click", async () => {
+  const username = document.getElementById("github-username").value.trim();
+  const githubProfile = document.getElementById("github-profile");
 
-    // Convert the response into JSON format
+  if (!username) {
+    githubProfile.innerHTML = "<p>Please enter a GitHub username.</p>";
+    return;
+  }
+
+  try {
+    const response = await fetch(`https://api.github.com/users/${username}`);
+
+    if (!response.ok) {
+      throw new Error("User not found");
+    }
+
     const data = await response.json();
 
-    // Get the GitHub card element from the DOM
-    const githubCard = document.getElementById("github-profile");
-
-    // Update the GitHub card with fetched user data
-    resultDiv.innerHTML = `
-        <h2>GitHub User Profile</h2>
-        <img src="${data.avatar_url}" width="100" alt="Profile Picture">
-        <p><strong>Username:</strong> ${data.login}</p>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Public Repositories:</strong> ${data.public_repos}</p>
-        <p><strong>Followers:</strong> ${data.followers}</p>
-        <a href="${data.html_url}" target="_blank">View Profile on GitHub</a>
+    githubProfile.innerHTML = `
+      <img src="${data.avatar_url}" width="100" alt="Profile Picture">
+      <p><strong>Username:</strong> ${data.login}</p>
+      <p><strong>Name:</strong> ${data.name || "N/A"}</p>
+      <p><strong>Public Repositories:</strong> ${data.public_repos}</p>
+      <p><strong>Followers:</strong> ${data.followers}</p>
+      <a href="${data.html_url}" target="_blank">View Profile on GitHub</a>
     `;
   } catch (error) {
-    // Handle any errors that occur during the fetch operation
+    githubProfile.innerHTML = "<p>User not found. Try another username.</p>";
     console.error("Error fetching GitHub user data:", error);
   }
-}
-
-// Call the loadGitHubUser function when the page loads to display GitHub user data
-loadGitHubUser();
+});
 
 //Asynchronous function to fetch a random joke from the Official Joke API and display it on the page
 async function loadJoke() {
@@ -218,32 +220,27 @@ async function loadJoke() {
 // call the loadJoke function when the page loads to display a random joke
 loadJoke();
 
-//Asynchronous function to fetch a random daily affirmattion from the Affirmations API and display it on the page
+//Asynchronous function to fetch a random piece of advice from the Advice Slip API and display it on the page
 async function loadAffirmation() {
   const affirmationCard = document.getElementById("custom-card");
 
   try {
-    const response = await fetch("https://api.quotable.io/random");
-
-    if (!response.ok) {
-      throw new Error("API request failed");
-    }
+    const response = await fetch("https://api.adviceslip.com/advice");
 
     const data = await response.json();
 
     affirmationCard.innerHTML = `
-      <h2>Daily Quote</h2>
-      <p>${data.content}</p>
-      <p><em>- ${data.author}</em></p>
+      <h2>Daily Advice</h2>
+      <p>${data.slip.advice}</p>
     `;
   } catch (error) {
     console.error("Error fetching affirmation:", error);
 
     affirmationCard.innerHTML = `
-      <h2>Daily Quote</h2>
+      <h2>Daily Advice</h2>
       <p>Stay patient. Great things take time.</p>
     `;
   }
 }
 
-loadAffirmation();
+document.addEventListener("DOMContentLoaded", loadAffirmation);
